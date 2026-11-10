@@ -1,5 +1,29 @@
 # LaunchDarkly Server-Side SDK for Node.js
 
+> [!IMPORTANT]
+> **About this fork (launchdarkly-labs):** this is a fork of the archived [launchdarkly/node-server-sdk](https://github.com/launchdarkly/node-server-sdk) (v7.x) that adds **SOCKS proxy support**. The changes are on the [`socks-proxy-support`](https://github.com/launchdarkly-labs/node-server-sdk/tree/socks-proxy-support) branch; `main` is an unmodified mirror of upstream apart from this note. This is not an officially supported LaunchDarkly package.
+>
+> **On the current SDK?** Use [`@launchdarkly/node-server-sdk`](https://www.npmjs.com/package/@launchdarkly/node-server-sdk) and its `proxyAgent` option ([js-core#1438](https://github.com/launchdarkly/js-core/pull/1438)) with an agent such as `new SocksProxyAgent('socks5://host:port')` from [`socks-proxy-agent`](https://www.npmjs.com/package/socks-proxy-agent). You don't need this fork.
+>
+> **Stuck on v7.x?** Install the branch:
+>
+> ```shell
+> npm install github:launchdarkly-labs/node-server-sdk#socks-proxy-support
+> ```
+>
+> Then set `proxyScheme` to `socks`, `socks4`, `socks4a`, `socks5`, or `socks5h`. `proxyHost` and `proxyPort` identify the SOCKS proxy, and `proxyAuth` (optional) is `username:password`. The password may contain `:`.
+>
+> ```javascript
+> const client = LaunchDarkly.init(sdkKey, {
+>   proxyScheme: 'socks5',
+>   proxyHost: 'socks.example.com',
+>   proxyPort: 1080,
+>   proxyAuth: 'username:password',
+> });
+> ```
+>
+> One SOCKS agent handles polling, streaming, and events over both HTTP and HTTPS. Requires Node 12+.
+
 # Use [@launchdarkly/node-server-sdk](https://www.npmjs.com/package/@launchdarkly/node-server-sdk) instead of this package.
 
 As mentioned in the [repository changelog](https://github.com/launchdarkly/node-server-sdk/blob/main/CHANGELOG.md), the `launchdarkly-node-server-sdk` project has been renamed to `@launchdarkly/node-server-sdk`. All future releases will be made from the [new repository](https://github.com/launchdarkly/js-core/tree/main/packages/sdk/server-node). Please consider upgrading and filing potential requests in that repository's [issue tracker](https://github.com/launchdarkly/js-core/issues?q=is%3Aissue+is%3Aopen+label%3A%22package%3A+sdk%2Fserver-node%22+sort%3Aupdated-desc).
